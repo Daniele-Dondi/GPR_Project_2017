@@ -15,7 +15,7 @@ import  Calc_DAC_with_Predistortion as dac # Functions available: W_form_triang 
 #-------------------------------------------------------------------------------------------
 # Configure the Serial port:
 # change COM number according to your PC connection!
-ser = serial.Serial("COM20", baudrate=9600, bytesize=8, parity='N',
+ser = serial.Serial("COM4", baudrate=9600, bytesize=8, parity='N',
                     stopbits=1, timeout=None, rtscts=1)
 
 # DEFAULT SIGNAL PARAMETERS:
