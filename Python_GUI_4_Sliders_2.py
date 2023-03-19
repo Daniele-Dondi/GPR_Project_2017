@@ -3,6 +3,8 @@ Created on Fri Mar 24 12:44:18 2017
 
 @authors: Andrea & Margarita
 """
+#matlab software here: https://it.mathworks.com/help/phased/ug/fmcw-range-estimation.html
+#theory https://www.radartutorial.eu/02.basics/Frequency%20Modulated%20Continuous%20Wave%20Radar.en.html
 import  serial
 from    numpy   import append
 from    tkinter import Scale,Button, VERTICAL, Tk, Menu, messagebox, Label, TclError

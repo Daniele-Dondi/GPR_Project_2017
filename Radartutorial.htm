@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Radartutorial</title>
+<meta charset="UTF-8">
+<meta name="DC.Publisher" content="Dipl.-Ing. (FH) Christian Wolff">
+<meta name="Author" content="Dipl.-Ing. (FH) Christian Wolff">
+<meta name="Description" content="The principle of a Frequency Modulated Continuous- Wave (FMCW) radar">
+<meta name="Keywords" content="fmcw,radar,sensor,front end,basics,radar principle,radartechnology,radar technology">
+<link rel="canonical" href="https://www.radartutorial.eu/02.basics/Frequency%20Modulated%20Continuous%20Wave%20Radar.en.html">
+<link rel="shortcut icon" href="https://www.radartutorial.eu/style/css/images/favicon.ico">
+<link rel="stylesheet" href="Radartutorial_files/prnt.css" title="default" media="print">
+<link rel="stylesheet" href="Radartutorial_files/scrn.css" title="default" media="screen and (min-width:799px)">
+<link rel="stylesheet" href="Radartutorial_files/hh1.css" media="screen and (max-width:799px)">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow,noydir">
+</head>
+
+<body id="this"><div id="WzTtDiV" style="visibility: hidden; position: absolute; overflow: hidden; padding: 0px; width: 1365px; left: -1366px; top: 0px;"></div>
+<script src="Radartutorial_files/wz_tooltip.js"></script>
+	<script>
+	<!--
+	var tit1 ="Principle of operation";
+		var txt1 ="<img src=\"pic/fmcw_prinzip.png\" width=\"300\" height=\"180\" alt=\"\" \/><br>When the green sawtooth pulse (i.e. the received signal) is too far to the right, the overlap with the next measurement period is too large: it would create a false difference frequency: so this area must be locked for the measurement. However, the more the received signal is shifted, the less time remains for measuring the correct frequency difference.";
+	var tit2 ="D/A converter";
+		var txt2 ="The digital-to-analog converter converts a digital control word into an analog control voltage.";
+	var tit3 ="VCO";
+		var txt3 ="The <b>V<\/b>oltage <b>C<\/b>ontrolled <b>O<\/b>scillator is a special radio frequency generator. Depending on the value of a control voltage the oscillator changes its frequency.";
+	var tit4 ="Bandpass filter";
+		var txt4 ="The bandpass filter blocks spikes and harmonics so that only the permitted frequency is emitted.";
+	var tit5 ="-3dB coupler";
+		var txt5 ="A part of the transmission power shall branched off, so that the down-converter receives a reference frequency.";
+	var tit6 ="Power amplifier";
+		var txt6 ="The power amplifier amplifies the oscillator waveforms to the desired transmit power. In cheap radar sensors it can also be omitted.";
+	var tit7 ="Transmitting antenna";
+		var txt7 ="It radiates the transmission power directed into the free space.";
+	var tit8 ="Receiving antenna";
+		var txt8 ="It converts incoming electromagnetic fields back into a RF voltage.";
+	var tit9 ="Low Noise Pre-Amplifier";
+		var txt9 ="The incoming echo signals are extremely weak. The low-noise amplifier amplifies them, that they can be processed by the mixer.";
+	var tit10 ="Mixing stage";
+		var txt10 ="This mixing stage compares echo signals with the current transmission frequency. The output signal of the mixing stage is the difference between them.";
+	var tit11 ="Low-pass filter";
+		var txt11 ="Unwanted mixing frequencies are blocked.";
+	var tit12 ="Amplifier";
+		var txt12 ="The echo signals are extremely weak. The amplifier must amplify this by at least a 10,000-fold to permit an evaluation.";
+	var tit13 ="Analog-to-digital converter";
+		var txt13 ="The analog-to-digital converter must convert the analog signal into a digital word. Depends on the maximum input frequency it needs an adequate sampling clock frequency.";
+	-->
+	</script>
+
+<header>
+<a href="https://www.radartutorial.eu/index.en.html" id="sol" title="home"></a>
+<h1 id="h_line"><img class="hh_yes" src="Radartutorial_files/logo.svg" alt="www.radartutorial.eu" width="180">
+	<img class="hh_no scr" src="Radartutorial_files/logo.svg" alt="www.radartutorial.eu" width="360">
+	<span class="copyright hh_no">Radar Basics</span></h1>
+</header>
+
+<nav>
+
+<ul class="dropdown">
+<li class="vz"><a href="https://www.radartutorial.eu/02.basics/Continuous%20Wave%20Radar.en.html" id="zur" title="Previous page: "></a></li>
+	<script>let pfad; pfad = "!rp";</script><script src="Radartutorial_files/nav.en1.js"></script><li class="hh_yes"><a href="https://www.radartutorial.eu/index.en.html" id="hhhome" title="home"></a></li><li class="hh_yes"><a href="https://www.radartutorial.eu/html/sm03.en.html" id="hhsite" title="site map"></a></li><li id="n-basics"><a href="https://www.radartutorial.eu/01.basics/!rb02.en.html" class="dir">Basics</a><ul><li><a href="https://www.radartutorial.eu/04.history/hi04.en.html">Historical Overview</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Physical%20fundamentals%20of%20the%20radar%20principle.en.html">Physical Bases of Radar</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Radar%20Principle.en.html">Radar Basic Principle</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Radar%20Principle.en.html" class="dir">Principle of Measurement</a>	<ul><li class="first"><a href="https://www.radartutorial.eu/01.basics/Distance-determination.en.html">Distance-determination</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Direction-determination.en.html">Direction-determination</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Maximum%20Unambiguous%20Range.en.html">Maximum Unambiguous Range</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Minimal%20Measuring%20Range.en.html">Minimal Measuring Range</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Measurement%20of%20the%20elevation%20angle.en.html">Elevation Angle</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Range%20Resolution.en.html">Range Resolution</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Radars%20Accuracy.en.html">Accuracy</a></li>	</ul></li>	<li><span class="dir">Radar timing performance</span>	<ul><li class="first"><a href="https://www.radartutorial.eu/01.basics/Pulse%20Repetition%20Frequency%20%28PRF%29.en.html">Pulse Repetition Frequency</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Duty%20cycle.en.html">Duty Cycle</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Dwell%20Time%20and%20Hits%20per%20Scan.en.html">Dwell Time/ Hits per Scan</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Time-dependences%20in%20Radar.en.html">Time Consideration of Pulse Radar</a></li>	</ul></li>	<li><span class="dir">The Radar Equation</span>	<ul><li class="first"><a href="https://www.radartutorial.eu/01.basics/Free-Space%20Path%20Loss.en.html">Derivation of Free-Space Path Loss</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/The%20Radar%20Range%20Equation.en.html">Derivation of the Radar Equation</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Radar%20Cross%20Section.en.html">Radar Cross-Section</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Typical%20Search%20Radar%20Loss%20Budget.en.html">Radar Loss Budget</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/The%20Radar%20equation%20in%20practice.en.html">Exemplary Calculations</a></li>	</ul></li>	<li><a href="https://www.radartutorial.eu/07.waves/Waves%20and%20Frequency%20Ranges.en.html">Radar Frequency Bands</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Radar%20Coverage.en.html">Radar Coverage</a></li>	<li><a href="https://www.radartutorial.eu/16.eccm/ja01.en.html">Electronic Warfare</a></li>	</ul></li><li id="n-sets"><a href="https://www.radartutorial.eu/02.basics/!rp02.en.html" class="dir">Radar Sets</a><ul><li><span class="dir">Classification of Radar systems</span>	<ul><li class="first"><a href="https://www.radartutorial.eu/02.basics/Classification%20of%20Radar%20systems%20%281%29.en.html" class="dir">Depending on Technologies</a>	<ul><li class="first"><a href="https://www.radartutorial.eu/01.basics/Radar%20Principle.en.html">Primary Radar</a></li>	<li><a href="https://www.radartutorial.eu/13.ssr/!sr01.en.html">Secondary Radar</a></li>	<li><a href="https://www.radartutorial.eu/02.basics/Continuous%20Wave%20Radar.en.html">Continuous Wave (CW) Radar</a></li>	<li><a href="https://www.radartutorial.eu/02.basics/Frequency%20Modulated%20Continuous%20Wave%20Radar.en.html">Frequency Modulated CW Radar (FMCW)</a></li>	<li><a href="https://www.radartutorial.eu/02.basics/FMiCW%20Radar.en.html">FMiCW Radar</a></li>	<li><a href="https://www.radartutorial.eu/02.basics/Pulse%20Radar.en.html">Pulse radar</a></li>	<li><a href="https://www.radartutorial.eu/05.bistatic/bs04.en.html">Bistatic Radar</a></li>	<li><a href="https://www.radartutorial.eu/20.airborne/ab06.en.html">Sidelooking Airborne Radar</a></li>	</ul></li>	<li><a href="https://www.radartutorial.eu/02.basics/Classification%20of%20Radar%20systems%20%282%29.en.html" class="dir">Depending on Designed Use</a>	<ul><li class="first"><a href="https://www.radartutorial.eu/02.basics/Air-Defense%20Radars.en.html">Air Defense Radar</a></li>	<li><a href="https://www.radartutorial.eu/02.basics/ATC-Radars.en.html">ATC-Radars</a></li>	<li><a href="https://www.radartutorial.eu/02.basics/Ground%20penetrating%20radar.en.html">Ground penetrating radar</a></li>	<li class="first"><a href="https://www.radartutorial.eu/15.weather/!wr01.en.html" class="dir">Weather Radar</a>	<ul><li class="first"><a href="https://www.radartutorial.eu/15.weather/wr04.en.html">Principle of Operation</a></li>	<li><a href="https://www.radartutorial.eu/15.weather/wr05.en.html">Adaptation of the Radar Equation</a></li>	<li><a href="https://www.radartutorial.eu/15.weather/wr07.en.html">Precipitation Radar</a></li>	<li><a href="https://www.radartutorial.eu/15.weather/wr08.en.html">Cloud Radar</a></li>	<li><a href="https://www.radartutorial.eu/15.weather/wr09.en.html">Wind Profiler</a></li>	<li><a href="https://www.radartutorial.eu/19.kartei/ka58.en.html">List of weather radars</a></li>	</ul></li>	</ul></li>	</ul></li>	<li><a href="https://www.radartutorial.eu/19.kartei/ka01.en.html">Database of Radars</a></li>	<li class="first"><a href="https://www.radartutorial.eu/02.basics/didactic%20radars.en.html" class="dir">Didactic Radars</a>	<ul><li class="first"><a href="https://www.radartutorial.eu/19.kartei/13.labs/karte003.en.html">CW-Radar</a></li>	<li><a href="https://www.radartutorial.eu/19.kartei/13.labs/karte004.en.html">FMCW-Radar</a></li>	<li><a href="https://www.radartutorial.eu/19.kartei/13.labs/karte006.en.html">Pulse Radar DPR–886</a></li>	<li><a href="https://www.radartutorial.eu/19.kartei/13.labs/karte007.en.html">Didactical Noiseradar</a></li>	</ul></li>	<li><a href="https://www.radartutorial.eu/14.selfmade/!sm01.en.html">Self-made CW-/FMCW- Radar</a></li>	</ul></li><li id="n-modes"><a href="https://www.radartutorial.eu/05.bistatic/bs02.en.html" class="dir">Radartechnology</a>	<ul><li class="first"><span class="dir">Frequency Diversity Radar</span>	<ul><li class="first"><a href="https://www.radartutorial.eu/01.basics/Frequency%20Diversity%20Radar.en.html">Functional block diagram</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Fluctuation%20Loss.en.html">Fluctuation Loss</a></li>	<li><a href="https://www.radartutorial.eu/01.basics/Radar%20equation%20for%20frequency%20diversity%20radar.en.html">Adaptation of the Radar Equation</a></li>	</ul></li>	<li><a href="https://www.radartutorial.eu/15.weather/wr51.en.html">Polarimetric Radar</a></li>	<li><a href="https://www.radartutorial.eu/08.transmitters/Intrapulse%20Modulation.en.html">Intrapulse Modulation</a></li>	<li><a href="https://www.radartutorial.eu/20.airborne/ab07.en.html">Synthetic Aperture Radar</a></li>	<li><a href="https://www.radartutorial.eu/13.ssr/!sr01.en.html" class="dir">Secondary Radar</a>	<ul><li class="first"><a href="https://www.radartutorial.eu/13.ssr/sr04.en.html">Functional Block Diagram</a></li>	<li><a href="https://www.radartutorial.eu/13.ssr/sr05.en.html" class="dir">Mode A/C</a>	<ul><li class="first"><a href="https://www.radartutorial.eu/13.ssr/sr06.en.html">Mode A/C Uplink Formats</a></li>	<li><a href="https://www.radartutorial.eu/13.ssr/sr07.en.html">Reply (Downlink) Format</a></li>	<li><a href="https://www.radartutorial.eu/13.ssr/sr09.en.html">Side Lobe Suppression</a></li>	<li><a href="https://www.radartutorial.eu/13.ssr/sr14.en.html">Fruit</a></li>	<li><a href="https://www.radartutorial.eu/13.ssr/sr15.en.html">Garbling</a></li>	</ul></li>	<li><a href="https://www.radartutorial.eu/13.ssr/sr20.en.html" class="dir">Mode S</a>	<ul><li class="first"><a href="https://www.radartutorial.eu/13.ssr/sr21.en.html">Mode S Interrogations</a></li>	<li><a href="https://www.radartutorial.eu/13.ssr/sr22.en.html">Individually Mode S Interrogation</a></li>	<li><a href="https://www.radartutorial.eu/13.ssr/sr23.en.html">Differential Phase Shift Keying (DPSK)</a></li>	<li><a href="https://www.radartutorial.eu/13.ssr/sr24.en.html">Reply Formats</a></li>	<li><a href="https://www.radartutorial.eu/13.ssr/sr25.en.html">Squitter Mode</a></li>	</ul></li>	<li><a href="https://www.radartutorial.eu/13.ssr/sr17.en.html">Transponder</a></li>	</ul></li>	<li><a href="https://www.radartutorial.eu/02.basics/MIMO-radar.en.html">MIMO - Radar</a></li>	</ul></li><li id="n-devices"><a href="https://www.radartutorial.eu/06.antennas/!an02.en.html" class="dir">Radar Devices</a>	<ul><li class="first"><a href="https://www.radartutorial.eu/06.antennas/!an01.en.html" class="dir">Antenna</a>	<ul><li class="first"><a href="https://www.radartutorial.eu/06.antennas/Antenna%20Characteristics.en.html">Characteristics</a></li>	<li><a href="https://www.radartutorial.eu/06.antennas/Parabolic%20Antenna.en.html">Parabolic Dish Antenna</a></li>	<li><a href="https://www.radartutorial.eu/06.antennas/Slot%20Antenna.en.html">Slot Antenna</a></li>	<li><a href="https://www.radartutorial.eu/06.antennas/Cosecant%20Squared%20Pattern.en.html">Cosecant Squared Pattern</a></li>	<li><a href="https://www.radartutorial.eu/06.antennas/Cassegrain%20Antenna.en.html">Cassegrain Antenna</a></li>	<li><span class="dir">Phased Array Antenna</span>	<ul><li class="first"><a href="https://www.radartutorial.eu/06.antennas/Phased%20Array%20Antenna.en.html">Principle of Operation</a></li>	<li><a href="https://www.radartutorial.eu/06.antennas/Feeding%20Systems.en.html">Feeding Systems</a></li>	<li><a href="https://www.radartutorial.eu/06.antennas/Crow%27s-Nest%20Antenna.en.html">Crow's-Nest Antenna</a></li>	<li><a href="https://www.radartutorial.eu/06.antennas/Phase%20Shifter.en.html">Phase Shifter Devices</a></li>	<li><a href="https://www.radartutorial.eu/06.antennas/an80.en.html">Phased-Array Demonstrator</a></li>	</ul></li>	<li><a href="https://www.radartutorial.eu/06.antennas/Monopulse%20Antenna.en.html">Monopulse Antenna</a></li>	<li><a href="https://www.radartutorial.eu/08.transmitters/Transmitter%20Modules%20of%20an%20Active%20Antenna.en.html">Active Antenna</a></li>	<li><a href="https://www.radartutorial.eu/06.antennas/Duplexer.en.html">Duplexer</a></li>	<li><a href="https://www.radartutorial.eu/06.antennas/Diplexer-Filter.en.html">Diplexer</a></li>	</ul></li>	<li><a href="https://www.radartutorial.eu/08.transmitters/!tx01.en.html" class="dir">Transmitter</a>	<ul><li><a href="https://www.radartutorial.eu/08.transmitters/Radar%20Transmitter.en.html">Overview</a></li>	<li class="first"><span class="dir">Coherent-on-Receive Radar</span>	<ul><li class="first"><a href="https://www.radartutorial.eu/08.transmitters/Pseudo-coherent%20Radar.en.html">Functional Block Diagram</a></li>	<li><a href="https://www.radartutorial.eu/08.transmitters/Radar%20Modulator.en.html">Modulator</a></li>	<li><a href="https://www.radartutorial.eu/08.transmitters/Thyratron.en.html">Thyratron</a></li>	<li><a href="https://www.radartutorial.eu/08.transmitters/Magnetron.en.html">Magnetron</a></li>	</ul></li>	<li><span class="dir">Coherent Radar</span>	<ul><li class="first"><a href="https://www.radartutorial.eu/11.coherent/co05.en.html">Concept of Coherence</a></li>	<li><a href="https://www.radartutorial.eu/08.transmitters/Fully%20Coherent%20Radar.en.html">Functional Block Diagram</a></li>	<li><a href="https://www.radartutorial.eu/08.transmitters/Crossed-Field%20Amplifier%20%28Amplitron%29.en.html">Cross-Field Amplifier</a></li>	<li><a href="https://www.radartutorial.eu/08.transmitters/Klystron.en.html">Klystron</a></li>	<li><a href="https://www.radartutorial.eu/08.transmitters/Extended%20Interaction%20Klystron.en.html">Extended Interactive Klystron</a></li>	<li><a href="https://www.radartutorial.eu/08.transmitters/Traveling%20Wave%20Tube.en.html">Traveling-wave tube</a></li>	<li><a href="https://www.radartutorial.eu/08.transmitters/twystron.en.html">Twystron</a></li>	<li><a href="https://www.radartutorial.eu/08.transmitters/Solid%20State%20Amplifier.en.html">solid-state Amplifier</a></li>	<li><a href="https://www.radartutorial.eu/08.transmitters/Transmitter%20Modules%20of%20an%20Active%20Antenna.en.html">Transmitter Modules of Active Antennas</a></li>	</ul></li>	</ul></li>	<li><a href="https://www.radartutorial.eu/09.receivers/!rx01.en.html" class="dir">Receiver</a>	<ul><li class="first"><span class="dir">Superheterodyne</span>	<ul><li class="first"><a href="https://www.radartutorial.eu/09.receivers/rx05.en.html">Functional Block Diagram</a></li>	<li><a href="https://www.radartutorial.eu/09.receivers/rx06.en.html">Image-Frequency Interferences</a></li>	<li><a href="https://www.radartutorial.eu/09.receivers/rx07.en.html">Double Heterodyning</a></li>	</ul></li>	<li><a href="https://www.radartutorial.eu/09.receivers/rx08.en.html">Automatic Gain Control Methods</a></li>	<li><a href="https://www.radartutorial.eu/09.receivers/rx11.en.html">Automatic Frequency Control</a></li>	<li><a href="https://www.radartutorial.eu/09.receivers/rx12.en.html">Amplitude Detector</a></li>	<li><a href="https://www.radartutorial.eu/11.coherent/!co01.en.html" class="dir">Coherent Radar Technology</a>	<ul><li class="first"><a href="https://www.radartutorial.eu/11.coherent/co04.en.html">Clutter</a></li>	<li><a href="https://www.radartutorial.eu/11.coherent/co06.en.html">Doppler Effect</a></li>	<li><a href="https://www.radartutorial.eu/11.coherent/co07.en.html">Pulse Pair Processing</a></li>	<li><a href="https://www.radartutorial.eu/11.coherent/Doppler-Filter.en.html">Doppler Filter</a></li>	<li><a href="https://www.radartutorial.eu/11.coherent/co13.en.html">Blind Speed</a></li>	</ul></li>	</ul></li>	<li><a href="https://www.radartutorial.eu/12.scopes/!sc01.en.html" class="dir">Radar Scopes</a>	<ul><li class="first"><a href="https://www.radartutorial.eu/12.scopes/sc05.en.html">A-scope</a></li>	<li><a href="https://www.radartutorial.eu/12.scopes/sc06.en.html">B-scope</a></li>	<li><a href="https://www.radartutorial.eu/12.scopes/sc11.en.html">PPI-scope</a></li>	<li><a href="https://www.radartutorial.eu/12.scopes/sc13.en.html">Raster-Scan Monitor</a></li>	</ul></li>	<li><a href="https://www.radartutorial.eu/10.processing/sp05.en.html" class="dir">Radar Signal Processing</a>	<ul><li class="first"><a href="https://www.radartutorial.eu/10.processing/sp06.en.html">I&amp;Q Phase Detector</a></li>	<li><a href="https://www.radartutorial.eu/10.processing/sp08.en.html">Hit Processor</a></li>	<li><a href="https://www.radartutorial.eu/10.processing/sp11.en.html">Sliding Window</a></li>	<li><a href="https://www.radartutorial.eu/10.processing/sp13.en.html">Center of Mass Correlation</a></li>	<li><a href="https://www.radartutorial.eu/10.processing/sp20.en.html">Local Tracking</a></li>	</ul></li>	</ul></li><li id="n-service"><a href="https://www.radartutorial.eu/html/se02.en.html" class="dir">Service</a>	<ul><li class="first"><a href="https://www.radartutorial.eu/html/help.en.html">Help</a></li>	<li><a href="https://www.radartutorial.eu/html/author.en.html">About us</a></li>	<li><a href="https://www.radartutorial.eu/html/data.en.html">Privacy policy</a></li>	<li><a href="https://www.radartutorial.eu/html/sm03.en.html" class="dir">Sitemap</a>	<ul><li class="first"><a href="https://www.radartutorial.eu/02.basics/!rp03.en.html">(in Sub Directory)</a></li></ul></li>	<li><a href="https://www.radartutorial.eu/druck/index.html">Print Versions</a></li>	<li><a href="https://www.radartutorial.eu/html/html04.en.html">Suggested Literature</a></li>	<li><a href="https://www.radartutorial.eu/html/feed.en.html">Keyword Register</a></li>	<li><a href="https://www.radartutorial.eu/html/abbr.en.html">List of abbreviations</a></li>	<li><a href="https://www.radartutorial.eu/logos/hersteller.html">Radarmanufacturers Index</a></li>	<li><a href="https://www.radartutorial.eu/html/statistik.en.html">Daily Traffic</a></li>	<li><span class="dir">Appendices</span>	<ul><li class="first"><a href="https://www.radartutorial.eu/22.messpraxis/!mp01.en.html">Measurement practice</a></li>	<li><a href="https://www.radartutorial.eu/21.semiconductors/!hl01.en.html">Semiconductors</a></li>	<li><a href="https://www.radartutorial.eu/07.waves/wa01.en.html">Propagation of Electromagnetic Waves</a></li>	<li><a href="https://www.radartutorial.eu/03.linetheory/!tl01.en.html">Characteristics of Transmission Lines</a></li>	<li><a href="https://www.radartutorial.eu/18.explanations/ex49.en.html">Metric Measurement Units</a></li>	</ul></li>	</ul></li>
+
+<li id="n-lingua"><span class="dir" id="navling"> </span><ul>
+	<li class="first"><a href="https://www.radartutorial.eu/02.basics/rp08.cz.html" id="cz">Čeština</a></li>
+	<li><a href="https://www.radartutorial.eu/02.basics/Frequenzmodulierte%20Dauerstrichradarger%C3%A4te.de.html" id="de">Deutsch</a></li>
+	<li><span id="en">English</span></li>
+	<li><a href="https://www.radartutorial.eu/02.basics/rp08.es.html" id="es">Español</a></li>
+	<li><a href="https://www.radartutorial.eu/02.basics/Radar%20%C3%A0%20onde%20continue%20modul%C3%A9e%20en%20fr%C3%A9quence.fr.html" id="fr">Français</a></li>
+	<li><a href="https://www.radartutorial.eu/02.basics/rp08.it.html" id="it">Italiano</a></li>
+	<!-- li><a href="rp08.hu.html" id="hu">Magyar</a></li -->
+	<li><a href="https://www.radartutorial.eu/02.basics/rp08.nl.html" id="nl">Nederlands</a></li>
+	<li><a href="https://www.radartutorial.eu/02.basics/rp08.po.html" id="pl">Polska</a></li>
+	<li><a href="https://www.radartutorial.eu/02.basics/rp08.pt.html" id="pt">Português</a></li>
+	<li><a href="https://www.radartutorial.eu/02.basics/rp08.ro.html" id="ro">Românã</a></li>
+	<li><a href="https://www.radartutorial.eu/02.basics/Frekans%20Mod%C3%BClasyonlu%20S%C3%BCrekli-Dalga%20Radar%C4%B1.tr.html" id="tr">Türkçe</a></li>
+	<li><a href="https://www.radartutorial.eu/02.basics/rp08.bg.html" id="bg">Български</a></li>
+	<li><a href="https://www.radartutorial.eu/02.basics/rp08.ru.html" id="ru">Русский</a></li>
+	<li><a href="https://www.radartutorial.eu/02.basics/rp08.uk.html" id="uk">Українська</a></li>
+	</ul>
+</li>
+
+<li class="vz"><a id="vor" href="https://www.radartutorial.eu/02.basics/FMiCW%20Radar.en.html" title="Next page: "></a></li>
+</ul>
+	<script src="Radartutorial_files/expent.en.js"></script><div class="expent" id="expent" style="top: 2926px;"><h6 class="separator">Sponsors:</h6>	<a href="https://www.cambridgepixel.com/" id="cpx_de" target="_blank"></a><br><div class="separator"> </div>	<a href="https://event.on24.com/wcc/r/4126350/5F1B465EB49CB137C10F1461AB6A6758/4548865?partnerref=mid_15013_hq__" id="RoSw8" target="_blank"></a><br><div class="separator"> </div>	<a href="https://www.hensoldt.net/" id="hensoldt" target="_blank"></a><br><div class="separator"> </div>	<a href="https://www.rhein-koester.com/" id="rhkoe-en" target="_blank"></a><br><div class="separator"> </div>	<a href="http://intersoft-electronics.com/" id="olen" target="_blank"></a><br><div class="separator"> </div>	<a href="https://www.pcbonline.com/PCB-FAB/High-Frequency-PCBs/" title="High frequency PCB" id="pcb" target="_blank"></a><br><div class="separator"> </div>	<a href="https://www.rohde-schwarz.com/solutions/test-and-measurement/aerospace-defense/radar-ew-test/radar-and-electronic-warfare-pocket-guide_255695.html?cid=010_com_dsp_123_rt_22-10_int__radar-pocketguide_ros_banner____" id="RoSw1" target="_blank"></a><br><div class="separator"> </div>	<a href="https://neuraforce.com/radartutorial/" id="hans" target="_blank"></a><br><div class="separator"> </div></div>
+
+</nav>
+
+<div class="content">
+<h4 class="hh_yes">Frequency-Modulated Continuous-Wave Radar (FMCW Radar)</h4>
+
+<div class="pictable_r prn" style="width:200px;">
+	<img src="Radartutorial_files/fmcw_prinzip.print.png" alt="" height="120">
+	<div class="legend fs10" style="left:125px; top:-115px; color:red;">transmitted signal</div>
+	<div class="legend fs10_2" style="left:160px; top:-100px; color:green;">received<br>echo signal</div>
+	<p>Figure 1: Ranging with an FMCW system</p>
+</div>
+<div class="pictable_r scr" style="width:410px;">
+	<img src="Radartutorial_files/fmcw_prinzip.png" alt="" width="400" height="240">
+	<div class="legend fs16" style="left:250px; top:-230px; color:red;">transmitted signal</div>
+	<div class="legend fs16_2" style="left:320px; top:-200px; color:green;">received<br>echo signal</div>
+	<a class="lupe-r" href="https://www.radartutorial.eu/02.basics/pic/fmcw_prinzip.print.png" title="Ranging with an FMCW system, 
+© 2011 Christian Wolff www.radartutorial.eu 
+(click to enlarge: 800·480px = 81 kByte)"></a>
+	<p>Figure 1: Ranging with an FMCW system</p>
+</div>
+
+<section>
+<h4 class="hh_no">Frequency-Modulated Continuous-Wave Radar (FMCW Radar)</h4>
+
+<p><span class="lemn">FMCW radar</span>
+ (<b>F</b>requency-<b>M</b>odulated <b>C</b>ontinuous <b>W</b>ave radar = <b>FMCW radar</b>)
+ is a special type of radar sensor which radiates continuous transmission power like a simple continuous wave radar
+ (<a href="https://www.radartutorial.eu/02.basics/Continuous%20Wave%20Radar.en.html">CW-Radar</a>).
+
+ In contrast to this CW radar FMCW radar can change its operating 
+frequency during the measurement:
+ that is, the transmission signal is modulated in frequency (or in 
+phase).
+ Possibilities of Radar measurements ​​through runtime measurements are 
+only technically possible with these changes in the frequency (or 
+phase).</p>
+<p>Simple continuous wave radar devices without frequency modulation have the disadvantage
+ that it cannot determine target range because it lacks the timing mark necessary
+ to allow the system to time accurately the transmit and receive cycle and to convert this into range.
+ Such a time reference for measuring the distance of stationary objects,
+ but can be generated using of frequency modulation of the transmitted signal.
+ In this method, a signal is transmitted, which increases or decreases in the frequency periodically.
+ When an echo signal is received, that change of frequency gets a delay
+ <span class="ftext">Δt</span> (by runtime shift) like to as the
+ <a href="https://www.radartutorial.eu/02.basics/Pulse%20Radar.en.html" onmouseover="Tip(impuls)" onmouseout="UnTip()">pulse radar technique</a>.
+ In pulse radar, however, the runtime must be measured directly.
+ In FMCW radar are measured the differences in phase or frequency 
+between the actually transmitted and the received signal instead.</p>
+
+<div class="inhalt clear_right">
+Table of Content « FMCW-Radar »
+<ol>
+	<li><a href="#abs1">Principle of measurement</a></li>
+	<li><a href="#abs10">Maximum Range and Range Resolution</a></li>
+	<li><a href="#abs2">Modulation pattern</a>
+	<ul><li><a href="#abs3">Sawtooth linear frequency changing</a></li>
+	<li><a href="#abs4">Triangular frequency changing</a></li>
+	<li><a href="#abs5">Frequency Shift Keying (FSK)</a></li>
+	<li><a href="#abs6">Stepped frequency changing</a></li></ul></li>
+	<li><a href="#bsbfm">Block Diagram</a></li>
+	<li><a href="#abs8">Imaging FMCW radar</a></li>
+	<li><a href="#abs9">Non-imaging FMCW radar</a></li>
+	<li>(<a class="pdf" href="https://www.radartutorial.eu/02.basics/pubs/FMCW-Radar.en.pdf" title="FMCW-Radar.en.pdf, 
+8 pages, 3914 words, 751 kByte">Printable version of this page</a>)</li>
+</ol>
+</div>
+<p>The basic features of FMCW radar are:</p>
+<ul><li>Ability to measure very small ranges to the target (the
+	<a href="https://www.radartutorial.eu/01.basics/Minimal%20Measuring%20Range.en.html" onmouseover="Tip(r_min)" onmouseout="UnTip()">minimal measured range</a> 
+	is comparable to the transmitted wavelength);</li>
+	<li>Ability to measure simultaneously the target range and its relative velocity;</li>
+	<li>Very high accuracy of range measurement;</li>
+	<li>Signal processing after mixing is performed at a low frequency 
+range, considerably simplifying the realization of the processing 
+circuits;</li>
+	<li>Safety from the absence of the pulse radiation with a high peak power.</li>
+</ul>
+
+<h4 id="abs1">Principle of measurement</h4>
+
+<p>Characteristics of FMCW radar are:</p>
+<ul><li>The distance measurement is accomplished by comparing the 
+frequency of the received signal to a reference (usually directly the 
+transmission signal).</li>
+	<li>The duration of the transmitted waveform 
+	<span class="ftext">T</span> is substantially greater than the required 
+	<a href="https://www.radartutorial.eu/01.basics/Pulse%20Repetition%20Frequency%20%28PRF%29.en.html" onmouseover="Tip(empfangszeit)" onmouseout="UnTip()">receiving time</a> 
+	for the installed distance measuring range.</li>
+</ul>
+
+<p>The distance <span class="ftext">R</span> to the reflecting object can be determined by the following relations:</p>
+
+<div class="eqn">
+ <!-- math>R = \frac{c_0|\mathrm{\Delta}t|}{2} =  \frac{c_0|\mathrm{\Delta}f|}{2\left( \frac{\mathrm{d}(f)}{\mathrm{d}(t)} \right)}</math -->
+ <img src="Radartutorial_files/rp08_(1).print.png" class="prn eqn" alt="" width="210" height="70">
+ <img src="Radartutorial_files/rp08_(1).png" class="scr eqn" alt="" width="240" height="80">
+ <p class="eqn">(1)</p>
+ <div>
+ <ul class="eqn">
+	<li><span class="ftext">c<sub class="fmath">0</sub></span> = speed of light = 3·10<sup>8&nbsp;m</sup>/<sub>s</sub></li>
+	<li><span class="ftext">Δt</span> = delay time [s]</li>
+	<li><span class="ftext">Δf</span> = measured frequency difference [Hz]</li>
+	<li><span class="ftext">R</span> = distance between antenna and the reflecting object (ground) [m]</li>
+	<li><span class="ftext">df/dt</span> = frequency shift per unit of time</li>
+ </ul>
+</div>
+</div>
+
+<p style="clear:both;">If the change in frequency is linear over a wide range, then the radar range can be determined by a simple <span class="fl">frequency comparison</span>.
+ The frequency difference <span class="ftext">Δf</span> is proportional to the distance <span class="ftext">R</span>.
+ Since only the absolute amount of the difference frequency can be 
+measured (negative numbers for frequency doesn't exist),
+ the results are at a linearly increasing frequency equal to a frequency
+ decreasing (in a static scenario: without Doppler effects).</p>
+
+<p>If the reflecting object has a
+ <a href="https://www.radartutorial.eu/11.coherent/Radial%20Speed.en.html" title="What is the radial speed?">radial speed</a>
+ with respect to the receiving antenna,
+ then the echo signal gets a Doppler frequency <span class="ftext">f<sub>D</sub></span> (caused by the speed).
+ The radar measures not only the difference frequency <span class="ftext">Δf</span> to the 
+ current frequency (caused by the runtime),
+ but additional a Doppler frequency <span class="ftext">f<sub>D</sub></span> (caused by the speed).
+ The radar then measures depending on the movement direction and the direction of the linear modulation
+ only the sum or the difference between the difference frequency as the carrier of the distance information,
+ and of the Doppler frequency as a carrier of the velocity information.
+ If the measurement is made during a falling edge of a saw tooth (see right part of Figure 3),
+ then the Doppler frequency <span class="ftext">f<sub>D</sub></span> is 
+subtracted of by the runtime frequency change.
+ If the reflecting object is moving away from the radar, then the 
+frequency of the echo signal is reduced by the Doppler frequency 
+additionally.
+ Now, if the measurement is performed with a sawtooth as shown in 
+Figure&nbsp;1,
+ then the received echo signal (the green graph) is moved not only by 
+the run time to the right but also by the Doppler frequency down.
+ The measured difference frequency <span class="ftext">Δf</span> is by the Doppler frequency <span class="ftext">f<sub>D</sub></span>
+ higher than according to the real run time should be.</p>
+
+<h4 id="abs10">Maximum Range and Range Resolution</h4>
+
+<p>By suitable choice of the frequency deviation per unit of time can be
+ determined the radar resolution,
+ and by choice of the duration of the increasing of the frequency (the 
+longer edge of the red sawtooth in Figure 1), can be determined the 
+maximum non-ambiguous range.
+ The maximum frequency shift and steepness of the edge can be varied 
+depending on the capabilities of the technology implemented circuit.</p>
+<p>The maximum unambiguous range is determined by the necessary temporal
+ overlap of the (delayed) received signal with the transmitted signal.
+ This is usually much larger than the energetic range, i.e. the 
+limitations by the
+ <a href="https://www.radartutorial.eu/01.basics/Free-Space%20Path%20Loss.en.html" onmouseover="Tip(fspl)" onmouseout="UnTip()">free space loss</a>.</p>
+<p>For the
+ <a href="https://www.radartutorial.eu/01.basics/Range%20Resolution.en.html" onmouseover="Tip(delta_R)" onmouseout="UnTip()">range resolution</a>
+ of an FMCW radar, the bandwidth <span class="ftext">BW</span> of the transmitted signal is decisive (as in so-called
+ <a href="https://www.radartutorial.eu/08.transmitters/Intrapulse%20Modulation.en.html" onmouseover="Tip(intrapuls)" onmouseout="UnTip()">chirp radar</a>).
+ However, the technical possibilities of
+ Fast Fourier Transformation
+ are limited in time (i.e. by the duration of the sawtooth <span class="ftext">Τ</span> ).
+ The resolution of the FMCW radar is determined by the frequency change that occurs within this time limit.</p>
+
+<div class="eqn">
+ <!-- <math>\mathrm{\Delta}f_{FFT} = \frac{1}{T} =  \frac{\mathrm{d}(f)}{\mathrm{d}(t)\cdot(f_{up}-f_{dwn})}</math> -->
+ <img src="Radartutorial_files/rp08_(2).print.png" class="prn eqn" alt="" width="185" height="80">
+ <img src="Radartutorial_files/rp08_(2).png" class="scr eqn" alt="" width="280" height="120">
+ <p class="eqn">(2)</p>
+ <div>
+ <ul class="eqn">
+	<li><span class="ftext">Δf<sub>FFT</sub></span> = smallest measurable frequency difference</li>
+	<li><span class="ftext">d(f)/d(t)</span> = Steepness of the frequency deviation</li>
+	<li><span class="ftext">f<sub>up</sub></span> = upper frequency (end of the sawtooth)</li>
+	<li><span class="ftext">f<sub>dwn</sub></span> = lower frequency (start of the sawtooth)</li>
+ </ul>
+</div>
+</div>
+
+<p style="clear:both;">The reciprocal of the duration of the sawtooth pulse leads to the smallest possible detectable frequency.
+ This can be expressed in the equation (1) as <span class="ftext">|Δf |</span> and results in a range resolution capability of the FMCW radar.</p>
+
+<div class="example">
+<p>For example, a given radar with a linear frequency shift with a duration of 1 ms,
+ can provide a maximum unambiguous range of less than 150 km theoretically.
+ This value results from the remaining necessarily overlap of the transmission signal with the echo signal
+ (see <span class="explan" onmouseover="Tip(txt1,TITLE,tit1)" onmouseout="UnTip()">Figure&nbsp;1</span>)
+ to get enough time for measuring a difference frequency.
+ Most this range can never be achieved due to low power of the transmitter.
+ Thus always remains enough time for a measurement of the difference frequency.</p>
+<p>If the maximum possible frequency shift for the transmitter’s modulation is 250&nbsp;MHz,
+ then depending on this edge steepness a delay time of 4&nbsp;ns obtains 1&nbsp;kHz frequency difference.
+ This corresponds to a range resolution of 0.6&nbsp;m.</p>
+<p><small>This example shows impressively the advantage of the FMCW radar:
+ A pulse radar must measure these 4&nbsp;ns delay difference, resulting in a considerable technical complexity.
+ A difference in frequency of 1&nbsp;kHz, however, is much easier to measure because it is in audio range.</small></p>
+</div>
+
+<p>As with any radar in the FMCW radar, besides the allocated bandwidth,
+ the antenna beamwidth determines the angular resolution in detecting objects.</p>
+
+<h4 id="abs2" class="dpneu">Modulation pattern</h4>
+
+<div class="pictable_r prn" style="width:100px; min-height: 180px;">
+	<img src="Radartutorial_files/modulationen.png" alt="" height="166">
+	<div class="legend fs8" style="left:10px; top:-170px;">sawtooth</div>
+	<div class="legend fs8" style="left:10px; top:-125px;">triangular</div>
+	<div class="legend fs8" style="left:10px; top:-85px;">rectangular</div>
+	<div class="legend fs8" style="left:10px; top:-35px;">staircase voltage</div>
+	<p>Figure 2: Common modulation pattern for an FMCW radar</p>
+</div>
+<div class="pictable_r scr" style="width:210px; min-height: 350px;">
+	<img src="Radartutorial_files/modulationen.png" alt="" height="333">
+	<div class="legend fs12" style="left:20px; top:-330px;">sawtooth</div>
+	<div class="legend fs12" style="left:20px; top:-240px;">triangular</div>
+	<div class="legend fs12" style="left:20px; top:-160px;">rectangular</div>
+	<div class="legend fs12" style="left:20px; top:-60px;">staircase voltage</div>
+	<a class="lupe-r" href="https://www.radartutorial.eu/02.basics/pic/modulationen.png" title="Common modulation pattern for an FMCW radar, 
+© 2013 Christian Wolff www.radartutorial.eu 
+(click to enlarge: 600·1000px = 8 kByte)"></a>
+	<p>Figure 2: Common modulation pattern for an FMCW radar</p>
+</div>
+
+<p>There are several possible modulation patterns which can be used for different measurement purposes:</p>
+<ul><li><b>Sawtooth modulation</b><br>
+	This modulation pattern is used in a relatively large range (maximum distance) 
+	combined with a negligible influence of Doppler frequency (for example, a maritime navigation radar).</li>
+	<li><b>Triangular modulation</b><br>
+	This modulation allows easy separation of the difference frequency <span class="ftext">Δf</span> 
+	of the Doppler frequency <span class="ftext">f<sub>D</sub></span></li>
+	<li><b>Square-wave modulation</b> (simple frequency-shift keying, 
+	<abbr title="Frequency Shift Keying">FSK</abbr>)<br>
+	This modulation is used for a very precise distance measurement at 
+	close range by phase comparison of the two echo signal frequencies.
+	It has the disadvantage, that the echo signals from several targets cannot be separated from each other, 
+	and that this process enables only a small unambiguous measuring range.</li>
+	<li><b>Stepped modulation (staircase voltage)</b><br>
+	This is used for interferometric measurements and expands the unambiguous measuring range.</li>
+	<li><b>Sinusoidal modulation</b><br>
+	Sinusoidal modulation forms have been used in the past. 
+	These could be easily realized by a motor turning a capacitor plate in the resonance chamber of the transmitter oscillator. 
+	The radar then used only the relatively linear part of the sine function near the zero crossing.</li>
+</ul>
+
+<h5 id="abs3">Sawtooth linear frequency changing</h5>
+
+<p>In a linear sawtooth frequency changing (see Figure&nbsp;1) a delay will shift the echo signal in time
+ (i.e. to the right in the picture).
+ This results in a frequency difference between the actual frequency and the delayed echo signal,
+ which is a measure of the distance of the reflecting object.
+ This frequency difference is called “beat frequency”.
+ An occurring Doppler frequency would now move the frequency of the entire echo signal either up
+ (moving towards the radar) or down (moving away from the radar).</p>
+<p>In this form of modulation, the receiver has no way to separate the two frequencies.
+ Thus, the Doppler frequency will occur only as a measurement error in the distance calculation.
+ In the choice of an optimum frequency sweep can be considered a priori,
+ that the expected Doppler frequencies are as small as the resolution or at least,
+ that the measurement error is as small as possible.</p>
+
+<div class="pictable_r prn" style="width:200px;">
+	<img src="Radartutorial_files/fmcw_prinzip(2).print.jpg" alt="" width="200" height="240">
+	<div class="legend fs10" style="left:110px; top:-225px; color:red;">transmitted signal</div>
+	<div class="legend fs10_2" style="left:160px; top:-170px; color:green;">received<br>echo signal</div>
+	<p>Figure 3: Relationships with triangular modulation pattern</p>
+</div>
+<div class="pictable_r scr hh_no" style="width:410px;">
+	<img src="Radartutorial_files/fmcw_prinzip(2).png" alt="" width="400" height="480">
+	<div class="legend fs16" style="left:250px; top:-450px; color:red;">transmitted signal</div>
+	<div class="legend fs16_2" style="left:320px; top:-340px; color:green;">received<br>echo signal</div>
+	<a class="lupe-r" href="https://www.radartutorial.eu/02.basics/pic/fmcw_prinzip(2).print.jpg" title="Relationships with triangular modulation pattern, 
+© 2011 Christian Wolff www.radartutorial.eu 
+(click to enlarge: 1000·120px = 89 kByte)"></a>
+	<p>Figure 3: Relationships with triangular modulation pattern</p>
+</div>
+
+<p>This will be the case for example in maritime navigation radar:
+ Boats move in the coastal area at a limited speed, with respect to each
+ other perhaps with a maximum of 10&nbsp;meters per second.
+ In this frequency band of these radar sets
+ (<a href="https://www.radartutorial.eu/07.waves/wa04.en.html" onmouseover="Tip(freq1)" onmouseout="UnTip()" class="df">X-Band</a>
+ mostly), the expected maximum Doppler frequency is 666&nbsp;Hz
+ If the radar signal processing uses a resolution in the kilohertz range per meter, this Doppler frequency is negligible.
+ Because the at an airfield occurring take-off and landing speeds of up to 200&nbsp;m/s,
+ a maritime navigation FMCW radar would have trouble at all to see these planes.
+ The measurement error caused by the Doppler frequency can be greater than the distance to be measured.
+ The target signs would then theoretically appear in a negative distance, i.e. before the start of the deflection on the screen.</p>
+
+<h5 id="abs4">Triangular frequency changing</h5>
+
+<div class="pictable_r hh_yes" style="width:300px;">
+<a href="https://www.radartutorial.eu/02.basics/pic/fmcw_prinzip(2).print.jpg">
+	<img src="Radartutorial_files/fmcw_prinzip(2).png" alt="" width="300" height="360"></a>
+	<div class="legend fs10" style="left:210px; top:-320px; color:red;">transmitted signal</div>
+	<div class="legend fs10_2" style="left:240px; top:-260px; color:green;">received<br>echo signal</div>
+	<p>Figure 3: Relationships with triangular modulation pattern</p>
+</div>
+
+<p>In a triangular-shaped frequency changing, a distance measurement can
+ be performed on both the rising and on the falling edge.
+ In Figure&nbsp;3, an echo signal is shifted due to the running time 
+compared to the transmission signal to the right.
+ Without a Doppler frequency, the amount of the frequency difference 
+during the rising edge is equal to the measurement during the falling 
+edge.</p>
+<p>A Doppler frequency shifts the echo signal in height (green graph in the figure&nbsp;3).
+ It appears the sum of the frequency difference <span class="ftext">Δf</span> and the Doppler frequency <span class="ftext">f<sub>D</sub></span>
+ at the rising edge, and the difference between these two frequencies at the falling edge.
+ This opens up the possibility of making an accurate distance determination,
+ despite the frequency shift caused by the Doppler frequency,
+ which then consists of the arithmetic average of the two parts of measurements at different edges of the triangular pattern.
+ At the same time the accurate Doppler frequency can be determined from two measurements. 
+ The difference between the two difference frequencies is twice the Doppler frequency.
+ Since the two differential frequencies, however, are not simultaneously available,
+ this comparison requires digital signal processing, with intermediate storage of the measured results.</p>
+<p>The Doppler frequency-adjusted frequency for the distance 
+determination and the Doppler frequency of a moving target is calculated
+ by:</p>
+
+<div class="eqn">
+ <!-- <math>f(R)=\frac{\mathrm{\Delta}(f_1)+\mathrm{\Delta}(f_2)}{2}</math><br><math>f(D)=\frac{|\mathrm{\Delta}(f_1)-\mathrm{\Delta}(f_2)|}{2}</math> -->
+ <img src="Radartutorial_files/rp08_(3,4).print.png" class="prn eqn" alt="" width="185" height="80">
+ <img src="Radartutorial_files/rp08_(3,4).png" class="scr eqn" alt="" width="280" height="120">
+ <p class="eqn">(3),(4)</p>
+ <div>
+ <ul class="eqn">
+	<li><span class="ftext">f (R)</span> = frequency as a measure of distance determination</li>
+	<li><span class="ftext">f<sub>D</sub></span> = Doppler frequency as a measure of the speed measurement</li>
+	<li><span class="ftext">Δf<sub>1</sub></span> = frequency difference at the rising edge</li>
+	<li><span class="ftext">Δf<sub>2</sub></span> = frequency difference at the falling edge</li>
+ </ul>
+</div>
+</div>
+
+<div class="pictable_r prn" style="width:200px; min-height: 220px; clear:both;">
+	<img src="Radartutorial_files/FMCW_ghost.jpg" alt="" height="148">
+	<div class="legend fs10" style="left:140px; top:-130px; color:blue;">ghost targets</div>
+	<p>Figure 4: Ghost targets, graphical solution</p>
+</div>
+<div class="pictable_r scr" style="width:310px; min-height: 240px;">
+	<img src="Radartutorial_files/FMCW_ghost.png" alt="" width="300" height="222">
+	<div class="legend fs16" style="left:180px; top:-180px; color:red;">ghost targets</div>
+	<p>Figure 4: Ghost targets, graphical solution</p>
+</div>
+
+<p>The frequency <span class="ftext">f (R)</span> can then be used in the formula&nbsp;(1) to calculate the exact distance.</p>
+<p>However, this method has the disadvantage that, if appear a plurality of reflective objects,
+ the measured Doppler frequencies cannot be uniquely associated with a target.
+ The assignment of the wrong Doppler frequency to a destination in the wrong distance can lead to ghost targets.
+ In figure&nbsp;4 a graphical solution is shown.
+ The position of a first target results from the functions
+ <span class="ftext">[-Δf<sub>1</sub>]<sub>1</sub> + f<sub>D</sub></span> and
+ <span class="ftext">[+Δf<sub>2</sub>]<sub>1</sub> - f<sub>D</sub></span>.
+ The intersection of the two lines is the position of the target&nbsp;1.
+ When a second object (<span class="ftext">[……]<sub>2</sub></span>)	with a second Doppler frequency appears
+ Just then both pairs of linear slopes give a total of four intersections, two of which are the ghost targets.
+ The position of ghost targets also depends on the steepness of the modulation pattern.
+ Therefore, the problem can be resolved by measuring cycles with different slope steepness’s:
+ then there to be shown only those targets, of which the coordinates are measured in both cycles in the same position.</p>
+
+<div class="pictable_r prn" style="width:240px; min-height: 220px;">
+	<img src="Radartutorial_files/2phasenCW.print.jpg" alt="" width="240" height="200">
+	<div class="legend fs10" style="left:64px; top:-196px;">1<sup>st</sup> frequency</div>
+	<div class="legend fs10" style="left:64px; top:-40px;">2<sup>nd</sup> frequency</div>
+	<p>Figure 5: The phase difference <span class="ftext">Δ<sub>n</sub>(φ)</span> is ​​a measure of 
+	how much wavelengths are equal to twice the distance (round trip)</p>
+</div>
+<div class="pictable_r scr" style="width:310px; min-height: 260px;">
+	<img src="Radartutorial_files/2phasenCW.png" alt="" width="300" height="250">
+	<div class="legend fs16" style="left:80px; top:-246px;">1<sup>st</sup> frequency</div>
+	<div class="legend fs16" style="left:80px; top:-50px;">2<sup>nd</sup> frequency</div>
+	<a class="lupe-r" href="https://www.radartutorial.eu/02.basics/pic/2phasenCW.print.jpg" title="The phase difference Δn(φ) is ​​a measure of how much wavelengths are equal to twice the distance (round trip), 
+© 2012 Christian Wolff www.radartutorial.eu 
+(click to enlarge: 640·480px = 81 kByte)"></a>
+	<p>Figure 5: The phase difference <span class="ftext">Δ<sub>n</sub>(φ)</span> is ​​a measure of 
+	how much wavelengths are equal to twice the distance (round trip)</p>
+</div>
+
+<h5 id="abs5"><b>F</b>requency <b>S</b>hift <b>K</b>eying (<b>FSK</b>)</h5>
+
+<p>The transceiver is simply switched back and forth with a rectangular 
+control voltage between two transmission frequencies.
+ There are two principal ways to process the output signals of the 
+transceiver.
+ The first possibility is to measure the duration of the frequency 
+change.
+ A signal appears at the output of the transceiver whose envelope is a 
+pulse having a given pulse width as a measure for the distance.
+ However, this measurement is a pure waste of time like the measurement 
+of pulse radar and is therefore either inaccurate or technologically 
+very complex.</p>
+<p>A second possibility is to compare the phase angle of the echo signals of the two frequencies.
+ During the pulse top of the rectangular pulse, the radar operates at the first frequency,
+ and during the interpulse period the radar operates at the second frequency.
+ During these times in the millisecond range, the radar will work as for CW radar method.
+ The output of the down mixer (see block diagram), a DC voltage appears as a measure
+ of the phase difference between the reception signal and its transmission signal.
+ The phase difference between the echo signals of different transmission frequencies
+ (technically: the voltage difference at the output of the mixer) is a measure of the distance.
+ Again, both echo signals are not measured simultaneously, the voltage values ​​must be stored digitally.</p>
+<p>However, because of the periodicity of the sine wave,
+ this method has only a very limited unambiguous measurement distance
+ that is even this range; there the phase difference between the both 
+echo signals is smaller than the half-wavelength.
+ A frequency difference of 20 MHz between two transmission frequencies 
+results in an unambiguous measuring range of 15 meters.
+ Multiple targets at close range cannot be separated, since only one 
+phase angle can be measured at the output of the mixer stage.
+ Several targets overlap to only a single output voltage at which 
+dominates the strongest target.</p>
+<p>If both analysis methods (in time and in phase) are applied 
+simultaneously, then the time-dependent distance determination can used 
+to as a rough evaluation.
+ The detailed results of the phase analysis can then be multiplied until
+ the result is close enough to the distance from the measurement of 
+time.
+ The bad unambiguous maximum range of the measurement of phase 
+difference is thus avoided.</p>
+
+<h5 id="abs6">Stepped frequency changing</h5>
+
+<p>In general, the same advantages and disadvantages of a stepped frequency modulation
+ as the method with a square-wave modulation apply.
+ However, the FMCW radar is now working with several successive frequencies.
+ In each of these individual frequencies, a phase angle of the echo signal is measured.
+ The unambiguous measurement range widens considerably, however,
+ since now the phase relationships between several frequencies must be repeated to create ambiguities.</p>
+<p>This method will be very interesting if resonances for individual component frequencies
+ can be observed at the irregularities of the reflecting object.
+ This measurement method is then a field of <span class="fl">interferometry</span>.</p>
+
+<h4 id="bsbfm" class="dpneu">Block Diagram of an FMCW radar sensor</h4>
+
+<div class="pictable_r prn" style="width:300px; min-height: 220px;">
+	<img src="Radartutorial_files/FMCW_BSB.print.jpg" alt="" width="300" height="210">
+	<div class="legend fs14" style="left:180px; top:-140px; color:goldenrod;">Transceiver</div>
+	<div class="legend fs10" style="left:40px; top:	0px; margin-bottom:16px; color:green;">Part of a microprocessor board</div>
+	<p>Figure 6: Block Diagram of an FMCW radar sensor</p>
+</div>
+<div class="pictable_r scr" style="width:310px; min-height: 230px;">
+	<img src="Radartutorial_files/FMCW_BSB.png" style="cursor:help;" usemap="#bsbfmcw" alt="" width="300" height="210">
+	<map name="bsbfmcw" id="bsbfmcw">
+	<area shape="rect" coords="34,168,74,209" href="#bsbfm" onmouseover="Tip(txt2,TITLE,tit2)" onmouseout="UnTip()" title="" alt="">
+	<area shape="rect" coords="34,68,74,107" href="#bsbfm" onmouseover="Tip(txt3,TITLE,tit3)" onmouseout="UnTip()" title="" alt="">
+	<area shape="rect" coords="34,28,74,86" href="#bsbfm" onmouseover="Tip(txt4,TITLE,tit4)" onmouseout="UnTip()" title="" alt="">
+	<area shape="rect" coords="93,28,134,68" href="#bsbfm" onmouseover="Tip(txt5,TITLE,tit5)" onmouseout="UnTip()" title="" alt="">
+	<area shape="rect" coords="205,19,244,59" href="#bsbfm" onmouseover="Tip(txt6,TITLE,tit6)" onmouseout="UnTip()" title="" alt="">
+	<area shape="rect" coords="275,0,294,74" href="#bsbfm" onmouseover="Tip(txt7,TITLE,tit7)" onmouseout="UnTip()" title="" alt="">
+	<area shape="rect" coords="275,81,295,156" href="#bsbfm" onmouseover="Tip(txt8,TITLE,tit8)" onmouseout="UnTip()" title="" alt="">
+	<area shape="rect" coords="205,99,244,138" href="#bsbfm" onmouseover="Tip(txt9,TITLE,tit9)" onmouseout="UnTip()" title="" alt="">
+	<area shape="circle" coords="167,119,22" href="#bsbfm" onmouseover="Tip(txt10,TITLE,tit10)" onmouseout="UnTip()" title="" alt="">
+	<area shape="rect" coords="94,99,134,138" href="#bsbfm" onmouseover="Tip(txt11,TITLE,tit11)" onmouseout="UnTip()" title="" alt="">
+	<area shape="rect" coords="133,169,175,209" href="#bsbfm" onmouseover="Tip(txt12,TITLE,tit12)" onmouseout="UnTip()" title="" alt="">
+	<area shape="rect" coords="204,169,244,209" href="#bsbfm" onmouseover="Tip(txt13,TITLE,tit13)" onmouseout="UnTip()" title="" alt="">
+	</map>
+	<div class="legend fs16" style="left:180px; top:-140px; color:yellow;">Transceiver</div>
+	<div class="legend fs16" style="left:40px; top:	10px; margin-bottom:16px; color:green;">Part of a microprocessor board</div>
+	<a class="lupe-r" href="https://www.radartutorial.eu/02.basics/pic/FMCW_BSB.print.jpg" title="Blockschaltbild eines FMCW-Radars, 
+© 2013 Christian Wolff www.radartutorial.eu 
+(click to enlarge: 1860·1300px = 96 kByte)"></a>
+	<p>Figure 6: Block Diagram of an FMCW radar sensor
+	<span class="interactive" title="Move the mouse pointer over the elements of this picture and you will receive an explanation of their intended function (works only with enabled javascript).">(interactive picture)</span></p>
+</div>
+
+<div class="pictable_r prn" style="width:210px;">
+	<img src="Radartutorial_files/img05-006-04.jpg" alt="" width="200" height="150">
+	<p>Figure 7: The FMCW-Radar ART Midrange uses separate antennas for transmitting and receiving</p>
+</div>
+<div class="pictable_r scr" style="width:310px;">
+	<img src="Radartutorial_files/img05-006-04.jpg" alt="" width="320" height="240">
+	<a class="lupe-r" href="https://www.radartutorial.eu/19.kartei/05.perimeter/pic/img05-006-04.jpg" title="The FMCW-Radar ART Midrange uses separate antennas for transmitting and receiving, 
+(Courtesy of ART, © 2013 ART)
+(click to enlarge: 1200·800px = 39 kByte)"></a>
+	<p>Figure 7: The FMCW-Radar 
+	<a href="https://www.radartutorial.eu/19.kartei/05.perimeter/karte006.en.html">ART Midrange</a>
+	uses separate 
+	<a href="https://www.radartutorial.eu/06.antennas/Offset-Antenna.en.html" onmouseover="Tip(offset)" onmouseout="UnTip()">offset antennas</a> 
+	for transmitting and receiving</p>
+</div>
+
+<p>An FMCW radar consists essentially of the transceiver and a control 
+unit with a microprocessor.
+ The transceiver is a compact module, and usually includes the patch 
+antenna implemented as separate transmit and receive antenna.
+ The high frequency is generated by a voltage controlled oscillator 
+which directly feeds the transmitting antenna, or its power is 
+additionally amplified.
+ A part of the high frequency is coupled out and fed to a mixer which 
+down converts the received and amplified echo signal in the baseband.</p>
+<p>The control board contains a microprocessor that controls the 
+transceiver,
+ converts the echo signals in a digital format as well (usually via USB 
+cable) ensures the connection to a personal computer or laptop.
+ Using a digital to analog converter, the control voltage is provided to
+ the frequency control.
+ The output voltage of the mixer is digitized.</p>
+<p>If using a single antenna, then due to the method (simultaneously transmitting and receiving) the FMCW radar needs a
+ <a href="https://www.radartutorial.eu/17.bauteile/bt33.en.html" onmouseover="Tip(ferrite)" onmouseout="UnTip()">ferrite circulator</a>
+ to separate the transmitting and receiving signals.
+ In the currently used patch antennas, however, the use of separate transmitting and receiving antennas is much cheaper.
+ On a common substrate are placed directly above each other, a transmitting antenna array and a receiving antenna array.
+ The polarization direction is rotated by 180° against each other often.
+ Often is reduced by an additional shielding plate a direct "crosstalk"
+ (ie a direct positive feedback between the two antennas).
+ Since the measurement is performed as a frequency difference between the transmitting and receiving signal,
+ the signal which is produced by this direct coupling can be suppressed due to the very small frequency difference.</p>
+<p>In pure CW radar applications only the
+ <a href="https://www.radartutorial.eu/11.coherent/co06.en.html">Doppler frequency</a>
+ must be processed.
+ This includes frequencies only up to 16.5 kHz by using an FMCW transceiver operating in
+ <a href="https://www.radartutorial.eu/07.waves/wa04.en.html" onmouseover="Tip(freq1)" onmouseout="UnTip()" class="df">K-Band</a>
+ (about 24 GHz) and the expected speeds for recording are up to 360 kilometers per hour.
+ Therefore as microprocessor there can be used a simple stereo audio processor,
+ which is produced in large quantities and is used for example in sound cards for home computers.
+ Even in the FSK method (rectangular pattern modulation) such a processor can be used conditionally.</p>
+<p>In contrast, the receiver in a FMCW radar application must be able to
+ process the whole transmitter's frequency shift.
+ Thus frequencies up to 250&nbsp;MHz are expected in the received 
+signal.
+ This has a significant impact on the bandwidth of the subsequent 
+amplifier and the necessary sampling frequency of the analog-to-digital 
+converter.
+ Thus, the signal processing board of FMCW radar is considerably more 
+expensive with respect to the CW radar.</p>
+<p>There are currently on the market many inexpensive FMCW radar sensors or FMCW radar modules,
+ which contain a complete transceiver with integrated patch antenna array as so-called <span class="fl">“front-end”</span> of FMCW radar device.
+ These modules include as the core usually the
+ <a href="https://www.radartutorial.eu/18.explanations/ex21.en.html" title="MMIC- Technologie">MMIC</a>
+ module TRX_024_xx
+ <span class="scr">(see <a href="https://www.radartutorial.eu/02.basics/pubs/Datenblatt_TRX_024_06.pdf" class="pdf">data sheet)</a> </span>from
+ <a href="https://www.siliconradar.de/" target="_blank" rel="external">Silicon Radar</a>
+ with a power output of up to 6&nbsp;dBm.
+ This chip operates in the
+ <a href="https://www.radartutorial.eu/07.waves/wa04.en.html" onmouseover="Tip(freq1)" onmouseout="UnTip()" class="df">K-Band</a>
+ (24.0 … 24.25 GHz) and can be used as a sensor for speed and distance measurements.
+ The modulation or a frequency change is dependent on a control voltage and is connected to an external circuit,
+ which is either a fixed voltage (then operates the module as a CW radar),
+ or it is controlled by a processor and based on the output voltage of a digital-analog converter.
+ The output signal of the mixer is usually provided as I and Q signals,
+ and needs to be substantially amplified before the analog-to-digital conversion.</p>
+
+<h4 id="abs8" class="dpneu">Imaging FMCW radar</h4>
+
+<div class="pictable_r prn" style="width:200px;">
+	<img src="Radartutorial_files/stripline_patch.print.jpg" alt="" height="236">
+	<p>Figure 8: The patch antenna array of a maritime FMCW navigation radar in X-band</p>
+</div>
+<div class="pictable_r scr" style="width:210px;">
+	<img src="Radartutorial_files/stripline_patch.png" alt="" height="200">
+	<a class="lupe-r" href="https://www.radartutorial.eu/02.basics/pic/stripline_patch.print.jpg" title="Patchantennengruppe eines Navigationsradars, 
+© 2008 navico www.northstarnav.com 
+(click to enlarge: 620·672px = 28 kByte)"></a>
+	<p>Figure 8: The patch antenna array of a maritime FMCW navigation radar in
+	<a href="https://www.radartutorial.eu/07.waves/wa04.en.html" onmouseover="Tip(freq1)" onmouseout="UnTip()" class="df">X-Band</a></p>
+</div>
+
+<p>This radar method is used in the so-called <span class="fl">Broadband Radar</span>™ as navigational radar for maritime applications.
+ Here, the frequency sweep is stopped, however, after reaching the maximum measurement range.
+ Therefore, the transmission signal looks more like a signal of pulse radar using
+ <a href="https://www.radartutorial.eu/08.transmitters/Intrapulse%20Modulation.en.html" onmouseover="Tip(intrapuls)" onmouseout="UnTip()">intrapulse modulation</a>.
+ This break has no direct influence on the maximum measuring distance 
+here.
+ However, it is necessary to read the measured data from a buffer, and 
+to transmit them lossless through narrowband line to the display unit.
+ Due to its operation - the frequency comparison of the received echo 
+signal with the transmitted signal,
+ which is available across the entire distance - it remains an FMCW 
+radar,
+ it will only intermittently switched off for a few milliseconds, as 
+more data are simply not needed.</p>
+<p>An imaging radar must perform a distance measurement for each point on the monitor.
+ A range resolution that is more dependent here on the size of a pixel of this screen and
+ from the ability of the signal processing to provide the data in the required speed.
+ It is required a high-resolution screen with the pixel resolution,
+ that as a minimum for each range difference two pixels must be available,
+ so even if the measured signal is exactly between the position of two pixels, both pixels 'light up'
+ and upon movement of the target, the number of pixels used,
+ and thus the relative brightness of the target character is the same.</p>
+
+<div class="example" style="clear:both;">
+<p>With the above as an example <span class="fl">Broadband-Radar</span>™ with a frequency shift of 65&nbsp;MHz per millisecond
+ you can get good measurements.</p>
+<ul>
+	<li>For an unambiguous runtime measurement with this radar are measurable only a maximum of 500&nbsp;µs (see
+	<span class="explan" onmouseover="Tip(txt1,TITLE,tit1)" onmouseout="UnTip()">Figure&nbsp;1</span>)
+	which corresponds to a possible maximum range of 75&nbsp;km.</li>
+	<li>The frequency deviation of 65 MHz per millisecond corresponds to a frequency changing of 65 hertz per nanosecond. 
+	If the following filters are technically able to resolve differences in frequency of 1&nbsp;kHz,
+	then herewith a measuring of time differences of 15 nanoseconds is possible, 
+	which corresponds to a range resolution of about 2&nbsp;meters.</li>
+	<li>If the maximum processable by the evaluation difference frequency is two megahertz, 
+	which accomplish an easy one-chip microcomputer,
+	then distances of up to 4000&nbsp;meters can be measured. 
+	(Without a microcontroller would then need 4000 different individual filters operating in parallel.)</li>
+	<li>Due to the measuring method here is the 
+	<a href="https://www.radartutorial.eu/01.basics/Radars%20Accuracy.en.html">accuracy</a> 
+	of measuring approximately equal to the 
+	<a href="https://www.radartutorial.eu/01.basics/Range%20Resolution.en.html" onmouseover="Tip(delta_R)" onmouseout="UnTip()">range resolution</a> 
+	and is still limited by the resolution of the screen scale.</li>
+</ul>
+<p>The FMCW radar can thus obtain a high spatial resolution with little technical effort.
+ To obtain the same resolution, a
+ <a href="https://www.radartutorial.eu/02.basics/Pulse%20Radar.en.html" onmouseover="Tip(impuls)" onmouseout="UnTip()">pulsed radar</a>
+ needs capable of measuring time in region of nanoseconds.
+ That would mean that the band width of this pulse radar transmitter must be at least 80&nbsp;MHz,
+ and for digitization the echo signal needs a sampling rate of 166&nbsp;MHz.</p>
+</div>
+
+<h4 id="abs9">Non-imaging FMCW radar</h4>
+
+<div class="pictable_r" style="width:210px;">
+	<img src="Radartutorial_files/altimeter.jpg" alt="Analoge Anzeige eines Radaraltimeters für ein Kleinflugzeug" width="200" height="200">
+	<p>Figure 9: Analogue display of radar altimeter</p>
+</div>
+
+<p>The measurement result of this FMCW radar is presented either as a numeric value to a pointer instrument
+ or digitized as alpha-numeric display on a screen.
+ It can be measured only a single dominant object but this one with a very high accuracy down to the centimeter range.
+ This method of distance determination is for example as used in aircraft
+ <a href="https://www.radartutorial.eu/02.basics/Altimeter.en.html">radio altimeter</a>.</p>
+<p>Even an analog pointer instrument can serve as an indicator for an FMCW radar (see Figure&nbsp;9).
+ The moving coil meter has a greater inductive impedance for higher frequencies and therefore
+ exhibits a value dependent on the frequency, which is then, however, not linear.</p>
+</section>
+
+<div class="next"><a id="vorh" href="https://www.radartutorial.eu/02.basics/FMiCW%20Radar.en.html" title="Next page: "></a></div>
+
+<footer><script src="Radartutorial_files/vorschau.en1.js"></script>
+	<div class="footer1">
+	<a href="#this" id="up" title="top of the page"></a>
+	<p>Publisher: <a href="https://www.radartutorial.eu/html/author.en.html">Christian Wolff</a>
+	<br>Text is available under the
+	<a href="https://www.radartutorial.eu/html/gnu.en.html" rel="license" target="_blank">GNU Free Documentation License</a>, and the<br>
+	<a href="https://www.radartutorial.eu/html/license.en.html" rel="license" target="_blank">Creative Commons Attribution-Share Alike 3.0 Unported</a> license,
+	additional terms may apply.</p>
+	</div>
+
+<p><br><small>If you are interested in: An FMCW-Demonstration in the
+ <a href="https://demonstrations.wolfram.com/FrequencyModulatedContinuousWaveFMCWRadar/" rel="nofollow external" target="_blank">Wolfram Demonstrations Project</a></small></p>
+
+</footer>
+	<script src="Radartutorial_files/exp.en.js"></script><div class="separator hh_yes"> </div><div class="hh_yes"><h6 class="separator">Sponsors:</h6>	<a href="https://www.rohde-schwarz.com/knowledge-center/webinars/webinar-testing-cognitive-radar-systems-register_255683.html?cid=010_com_dsp_ADT-Radar_rt_19-05_l__webinar-testing-cognitive-radar_ros_banner____mm-782495" id="RoSw8" target="_blank"></a><br><div class="separator"> </div>	<a href="https://www.cambridgepixel.com/" id="cpx_en_hh" target="_blank"></a><br><div class="separator"> </div>	<a href="https://www.hensoldt.net/" id="hensoldt" target="_blank"></a><br><div class="separator"> </div>	<a href="https://www.rhein-koester.com/" id="rhkoe_hh" target="_blank"></a><br><div class="separator"> </div>	<a href="https://www.pcbonline.com/PCB-FAB/High-Frequency-PCBs/" title="High frequency PCB" id="pcb_hh" target="_blank"></a><br><div class="separator"> </div>	<a href="https://www.rohde-schwarz.com/solutions/test-and-measurement/aerospace-defense/radar-ew-test/radar-and-electronic-warfare-pocket-guide_255695.html?cid=010_com_dsp_123_rt_22-10_int__radar-pocketguide_ros_banner____" id="RoSw1" target="_blank"></a><br><div class="separator"> </div>	<a href="https://neuraforce.com/radartutorial/" id="hans" target="_blank"></a><br></div>
+</div>
+</body></html>
