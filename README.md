@@ -1,4 +1,6 @@
 # GPR_Project_2017
+GROUND PENETRATING RADARS 
+
 A cheap GPR prototype has been developed by the workgroup of COST Action TU1208.
 <p align="center">
 <img src = "https://github.com/Ritchizh/GPR_Project_2017/blob/master/readme_img/e-cost.jpg" height = 240>
